@@ -86,7 +86,7 @@ function renderProducts(productListArray) {
     productItem.innerHTML = `
       <div class="flex items-center justify-between">
         <div>
-          <h3 class="font-semibold">${product.name} | (${product.code}) </h3>
+          <h3 class="font-semibold">${product.code} | ${product.name}) </h3>
           <span class="text-gray-600">${product.category}</span>
           <div class="mt-2 text-sm text-gray-600">
             ราคา: ฿${product.price} | คงเหลือ: ${product.quantity} ${product.unit} |
