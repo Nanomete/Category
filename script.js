@@ -2,27 +2,26 @@ const products = [];
 const productForm = document.getElementById('productForm');
 const productList = document.getElementById('productList');
 const searchInput = document.getElementById('search');
-let editingProductId = null;  // ตัวแปรสำหรับเก็บ ID ของสินค้าที่กำลังแก้ไข
+let editingProductId = null;
 
 productForm.addEventListener('submit', function (e) {
   e.preventDefault();
 
-  // รับข้อมูลทั้งหมดจากฟอร์ม
-  const code = document.getElementById('productCode').value;  // รหัสสินค้า
-  const name = document.getElementById('name').value;  // ชื่อสินค้า
-  const category = document.getElementById('category').value;  // หมวดหมู่
-  const price = document.getElementById('price').value;  // ราคา
-  const quantity = document.getElementById('quantity').value;  // จำนวน
-  const unit = document.getElementById('unit').value;  // หน่วยสินค้า
-  const dateAdded = document.getElementById('dateAdded').value;  // วันที่เพิ่มสินค้า
-  const supplier = document.getElementById('supplier').value;  // ซัพพลายเออร์
+  const code = document.getElementById('productCode').value;
+  const name = document.getElementById('name').value;
+  const category = document.getElementById('category').value;
+  const price = document.getElementById('price').value;
+  const quantity = document.getElementById('quantity').value;
+  const unit = document.getElementById('unit').value;
+  const dateAdded = document.getElementById('dateAdded').value;
+  const supplier = document.getElementById('supplier').value;
 
   // ถ้ามีการแก้ไขสินค้า
   if (editingProductId) {
     const productIndex = products.findIndex(p => p.id === editingProductId);
     if (productIndex !== -1) {
       products[productIndex] = {
-        id: editingProductId,  // ใช้ ID เดิมของสินค้าที่จะถูกแก้ไข
+        id: editingProductId,
         code,
         name,
         category,
@@ -33,8 +32,8 @@ productForm.addEventListener('submit', function (e) {
         supplier
       };
     }
-  } else {  // ถ้าไม่ได้แก้ไขสินค้า แค่เพิ่มสินค้าใหม่
-    const id = Date.now();  // สร้าง ID โดยใช้เวลาในปัจจุบัน
+  } else {
+    const id = Date.now();
     const product = {
       id,
       code,
@@ -49,9 +48,9 @@ productForm.addEventListener('submit', function (e) {
     products.push(product);
   }
 
-  renderProducts(products);  // รีเฟรชการแสดงผล
-  productForm.reset();  // รีเซ็ตฟอร์ม
-  editingProductId = null;  // รีเซ็ต ID ของสินค้าที่กำลังแก้ไข
+  renderProducts(products);
+  productForm.reset();
+  editingProductId = null;
 });
 
 searchInput.addEventListener('input', function () {
@@ -59,24 +58,24 @@ searchInput.addEventListener('input', function () {
 
   const filteredProducts = products.filter(product => 
     searchTerms.every(term => 
-      product.code.toLowerCase().includes(term) ||    // ค้นหาจากรหัสสินค้า
-      product.name.toLowerCase().includes(term) ||    // ค้นหาจากชื่อสินค้า
-      product.category.toLowerCase().includes(term) || // ค้นหาจากหมวดหมู่
-      product.price.toLowerCase().includes(term) ||    // ค้นหาจากราคา
-      product.quantity.toLowerCase().includes(term) || // ค้นหาจากจำนวน
-      product.unit.toLowerCase().includes(term) ||     // ค้นหาจากหน่วยสินค้า
-      product.dateAdded.toLowerCase().includes(term) ||// ค้นหาจากวันที่เพิ่มสินค้า
+      product.code.toLowerCase().includes(term) ||    // ค้นหาจากรหัสสินค้า หรือ
+      product.name.toLowerCase().includes(term) ||    // ค้นหาจากชื่อสินค้า หรือ
+      product.category.toLowerCase().includes(term) || // ค้นหาจากหมวดหมู่ หรือ
+      product.price.toLowerCase().includes(term) ||    // ค้นหาจากราคา หรือ
+      product.quantity.toLowerCase().includes(term) || // ค้นหาจากจำนวน หรือ
+      product.unit.toLowerCase().includes(term) ||     // ค้นหาจากหน่วยสินค้า หรือ
+      product.dateAdded.toLowerCase().includes(term) ||// ค้นหาจากวันที่เพิ่มสินค้า หรือ
       product.supplier.toLowerCase().includes(term)    // ค้นหาจากซัพพลายเออร์
     )
   );
 
-  renderProducts(filteredProducts);  // แสดงผลสินค้าที่ตรงกับคำค้น
+  renderProducts(filteredProducts);
 });
 
 function renderProducts(productListArray) {
   productList.innerHTML = '';
   
-  // การจัดเรียงสินค้าตามวันที่ เพิ่มการจัดเรียง (จากใหม่ไปเก่า)
+  //จัดเรียง (จากใหม่ไปเก่า)
   const sortedProducts = productListArray.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
 
   sortedProducts.forEach(product => {
@@ -122,7 +121,6 @@ function editProduct(id) {
     document.getElementById('dateAdded').value = product.dateAdded;
     document.getElementById('supplier').value = product.supplier;
     
-    // ตั้งค่าตัวแปรเพื่อเก็บ ID ของสินค้าที่กำลังแก้ไข
     editingProductId = product.id;
   }
 }
