@@ -88,6 +88,7 @@ function renderProducts(productListArray) {
     
     productItem.innerHTML = `
       <div class="flex items-center justify-between">
+      ${product.img ? `<img src="${product.img}" alt="${product.name}" class="w-20 h-20 object-cover rounded-lg">` : ''}
         <div>
           <h3 class="font-semibold">${product.code} | ${product.name}</h3>
           <span class="text-gray-600">${product.category}</span>
@@ -97,7 +98,6 @@ function renderProducts(productListArray) {
           </div>
         </div>
         <div class="flex gap-2">
-          ${product.img ? `<img src="${product.img}" alt="${product.name}" class="w-20 h-20 object-cover rounded-lg">` : ''}
           <button class="editBtn text-blue-500">แก้ไข</button>
           <button class="deleteBtn text-red-500">ลบ</button>
         </div>
