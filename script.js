@@ -15,6 +15,7 @@ productForm.addEventListener('submit', function (e) {
   const unit = document.getElementById('unit').value;
   const dateAdded = document.getElementById('dateAdded').value;
   const supplier = document.getElementById('supplier').value;
+  const img = document.getElementById('img').value;
 
   // ถ้ามีการแก้ไขสินค้า
   if (editingProductId) {
@@ -29,7 +30,8 @@ productForm.addEventListener('submit', function (e) {
         quantity,
         unit,
         dateAdded,
-        supplier
+        supplier,
+        img
       };
     }
   } else {
@@ -43,7 +45,8 @@ productForm.addEventListener('submit', function (e) {
       quantity,
       unit,
       dateAdded,
-      supplier
+      supplier,
+      img
     };
     products.push(product);
   }
@@ -65,7 +68,8 @@ searchInput.addEventListener('input', function () {
       product.quantity.toLowerCase().includes(term) || // ค้นหาจากจำนวน หรือ
       product.unit.toLowerCase().includes(term) ||     // ค้นหาจากหน่วยสินค้า หรือ
       product.dateAdded.toLowerCase().includes(term) ||// ค้นหาจากวันที่เพิ่มสินค้า หรือ
-      product.supplier.toLowerCase().includes(term)    // ค้นหาจากซัพพลายเออร์
+      product.supplier.toLowerCase().includes(term) ||  // ค้นหาจากซัพพลายเออร์
+      product.img.toLowerCase().includes(term)
     )
   );
 
@@ -75,7 +79,7 @@ searchInput.addEventListener('input', function () {
 function renderProducts(productListArray) {
   productList.innerHTML = '';
   
-  //จัดเรียง (จากใหม่ไปเก่า)
+  // จัดเรียง (จากใหม่ไปเก่า)
   const sortedProducts = productListArray.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
 
   sortedProducts.forEach(product => {
@@ -85,7 +89,7 @@ function renderProducts(productListArray) {
     productItem.innerHTML = `
       <div class="flex items-center justify-between">
         <div>
-          <h3 class="font-semibold">${product.code} | ${product.name} </h3>
+          <h3 class="font-semibold">${product.code} | ${product.name}</h3>
           <span class="text-gray-600">${product.category}</span>
           <div class="mt-2 text-sm text-gray-600">
             ราคา: ฿${product.price} | คงเหลือ: ${product.quantity} ${product.unit} |
@@ -93,6 +97,7 @@ function renderProducts(productListArray) {
           </div>
         </div>
         <div class="flex gap-2">
+          ${product.img ? `<img src="${product.img}" alt="${product.name}" class="w-20 h-20 object-cover rounded-lg">` : ''}
           <button class="editBtn text-blue-500">แก้ไข</button>
           <button class="deleteBtn text-red-500">ลบ</button>
         </div>

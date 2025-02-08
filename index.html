@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <title>ระบบจัดการสินค้าคงคลัง</title> -->
+  <title>ระบบจัดการสินค้าคงคลัง</title>
   <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gray-100 p-6">
   <div class="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-    <!-- <h2 class="text-3xl font-semibold mb-6 text-center">ระบบจัดการสินค้าคงคลัง</h2> -->
+    <h2 class="text-3xl font-semibold mb-6 text-center">ระบบจัดการสินค้าคงคลัง</h2>
     
     <form id="productForm" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
       <input type="text" id="productCode" class="border p-3 rounded-lg" placeholder="รหัสสินค้า" required>
@@ -20,7 +20,8 @@
       <input type="text" id="unit" class="border p-3 rounded-lg" placeholder="หน่วยสินค้า" required>
       <input type="date" id="dateAdded" class="border p-3 rounded-lg" required>
       <input type="text" id="supplier" class="border p-3 rounded-lg" placeholder="ซัพพลายเออร์" required>
-      <button type="submit" class="col-span-1 md:col-span-3 lg:col-span-4 bg-green-500 text-white p-3 rounded-lg">เพิ่มสินค้า</button>
+      <input type="file" id="img" class="border p-3 rounded-lg" placeholder="รูปภาพ" required>
+      <button type="submit" class="col-span-1 md:col-span-3 lg:col-span-4 bg-blue-500 text-white p-3 rounded-lg">เพิ่มสินค้า</button>
     </form>
     
     <div class="relative mb-6">
